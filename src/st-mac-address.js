@@ -15,6 +15,6 @@ import { NotImplementedError } from '../extensions/index.js';
  *
  */
 export default function isMAC48Address(/* n */) {
-  throw new NotImplementedError('Not implemented');
-  // remove line with error and write your code here
+  const regex = /^(?:[0-9A-F]{2}-?){6}$/gi;
+  return regex.test(mac);
 }

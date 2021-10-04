@@ -11,6 +11,6 @@ import { NotImplementedError } from '../extensions/index.js';
  *
  */
 export default function getEmailDomain(/* email */) {
-  throw new NotImplementedError('Not implemented');
-  // remove line with error and write your code here
+  const splitted = email.split("@");
+  return splitted[splitted.length - 1];
 }

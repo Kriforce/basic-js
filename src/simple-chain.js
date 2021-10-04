@@ -5,24 +5,42 @@ import { NotImplementedError } from '../extensions/index.js';
  * 
  */
 export default {
+  chain: [],
   getLength() {
-    throw new NotImplementedError('Not implemented');
-    // remove line with error and write your code here
+    return this.chain.length;
   },
-  addLink(/* value */) {
-    throw new NotImplementedError('Not implemented');
-    // remove line with error and write your code here
+  addLink(value) {
+    this.chain.push(value === null ? "null" : value.toString());
+    return this;
   },
-  removeLink(/* position */) {
-    throw new NotImplementedError('Not implemented');
-    // remove line with error and write your code here
+  removeLink(position) {
+    if (
+      typeof position !== "number" ||
+      position - 1 >= this.chain.length ||
+      position <= 0
+    ) {
+      this.chain.length = 0;
+      throw new Error("You can't remove incorrect link!");
+    }
+    position -= 1;
+    this.chain = [
+      ...this.chain.slice(0, position),
+      ...this.chain.slice(position + 1),
+    ];
+    return this;
   },
   reverseChain() {
-    throw new NotImplementedError('Not implemented');
-    // remove line with error and write your code here
+    this.chain.reverse();
+    return this;
   },
   finishChain() {
-    throw new NotImplementedError('Not implemented');
-    // remove line with error and write your code here
-  }
+    let str = "";
+    const divider = "~~";
+    for (let i = 0, len = this.chain.length; i < len; i++) {
+      const current = this.chain[i];
+      str += `( ${current} )${i + 1 < len ? divider : ""}`;
+    }
+    this.chain.length = 0;
+    return str;
+  },
 };
